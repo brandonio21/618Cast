@@ -16,4 +16,6 @@ as the Chromecast Sender object while the `cast.html` file serves as
 the receiver. Both of these files can be hosted (locally or remotely) and then
 plugged into the Chromecast development console for your own use
 
-
+### Launching ###
+The app can be launched on the Chromecast itself by navigating to the
+`launcher.html` page and clicking on the button.
