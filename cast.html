@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Weather Receiver</title>
+	<script src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+</head>
+<body style="color:darksalmon">
+	<script language="javascript">
+		window.onload = function() {
+			window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+			window.castReceiverManager.start();
+		}
+	</script>
+
+<br />
+<iframe id="forecast_embed" type="text/html" frameborder="0" height="245" width="100%" src="http://forecast.io/embed/#lat=37.772694&lon=-122.390903&name=618."> </iframe>
+
+
+<br />
+<br />
+<div id='todo' style="width:85%;margin-left:auto;margin-right:auto">
+	<h1 align="left">Todo List:</h1>
+	<hr />
+
+	<script language="javascript">
+		
+	</script>
+
+</div>
+</body>
+</html>
