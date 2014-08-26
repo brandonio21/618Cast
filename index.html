@@ -1,0 +1,103 @@
+<!doctype html>
+
+<html ng-app="taskModule">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=devide-width, initial-scale=1">
+		<title> 618Cast </title>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+		<script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+		<script src="core.js"></script>
+		<script language="javascript">
+
+		window['__onGCastApiAvailable'] = function(loaded, errorInfo) {
+		  if (loaded) {
+		    initializeCastApi();
+		  } else {
+		    console.log(errorInfo);
+		  }
+		}
+
+
+		initializeCastApi = function() {
+		  var sessionRequest = new chrome.cast.SessionRequest('9835D2DE');
+		  var apiConfig = new chrome.cast.ApiConfig(sessionRequest,
+		    sessionListener,
+		    receiverListener);
+		  chrome.cast.initialize(apiConfig, onInitSuccess, onError);
+		};
+
+		sessionListener = function() {};
+		receiverListener = function(e) {
+			if (e === chrome.cast.ReceiverAvailability.AVAILABLE) {
+			}
+		};
+
+		onInitSuccess = function() {
+			console.log("success!");
+
+		};
+
+		onError = function() { 
+			console.log("failure!!");
+		};
+
+		onRequestSessionSuccess = function(e) {
+			session = e;
+			console.log(session.displayName);
+		};
+		onLaunchError = function() {};
+
+
+		function requestSession()
+		{
+			chrome.cast.requestSession(onRequestSessionSuccess, onLaunchError)
+		}
+
+	</script>
+
+
+
+
+	</head>
+	<button onclick="requestSession()">Click me</button>
+	<br />
+	<body ng-controller="mainController">
+		<div class="container">
+
+			<div class="jumbotron text-center">
+				<h1>618Cast Task List <span class="label label-info">({{ tasks.length }} tasks)</span></h1>
+			</div>
+
+		<!-- TODO LIST -->
+		<div id="todo-list" class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+				
+				<div class="checkbox" ng-repeat="task in tasks">
+					<label>
+						<input type="checkbox" ng-click="deleteTask(task._id)"> {{ task.task }} - {{ task.creator }}</input>
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div id="todo-form" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="Task" ng-model="formData.text">
+						<input type="text" class="form-control input-lg text-center" placeholder="Creator" ng-model="creatorData.text">
+
+					</div>
+
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTask()">Add</button>
+				</form>
+			</div>
+		</div>
+
+
+	</body>
+</html>
